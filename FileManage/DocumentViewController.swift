@@ -8,8 +8,7 @@
 import UIKit
 
 class DocumentViewController: UIViewController {
-
-    //private let cell = UITableViewCell()
+    
     var pictures = [Data]()
     @IBOutlet private weak var tableView: UITableView!
     
@@ -26,7 +25,7 @@ class DocumentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "CellId")
@@ -36,45 +35,39 @@ class DocumentViewController: UIViewController {
     private func loaddImage(){
         let directory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         
-       
         let directoryContent = try! FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
         
         let imageFiles = directoryContent.filter{$0.pathExtension == "png"}
-
+        
         pictures.removeAll()
         imageFiles.forEach({image in
             let data = try! Data.init(contentsOf: image)
             pictures.insert(data, at: 0)
         })
-        
-
     }
     
-
+    
     @IBAction private func addPhoto(_ sender: Any) {
-        
         present(picker, animated: true, completion: nil)
     }
     
-
+    
 }
 
 extension DocumentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         loaddImage()
-
-        return pictures.count
         
+        return pictures.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! TableViewCell
         
         cell.pictureFromData.image = UIImage(data: pictures[indexPath.row])
         return cell
     }
-    
     
 }
 
@@ -92,7 +85,6 @@ extension DocumentViewController: UINavigationControllerDelegate, UIImagePickerC
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
-    
     
     func getDocumetnDirectory() -> URL {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
