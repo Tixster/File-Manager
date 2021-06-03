@@ -7,9 +7,50 @@
 
 import UIKit
 
+
+class Image {
+    
+    let defaults = UserDefaults.standard
+    let keyImage = "imageName"
+    static let shared = Image()
+    
+    struct FileImage: Codable {
+        let fileName: String
+        let path: String
+    }
+    
+    var pictures: [FileImage] {
+        get {
+            if let data = defaults.value(forKey: keyImage) as? Data {
+                let image = try! PropertyListDecoder().decode([FileImage].self, from: data)
+                if defaults.bool(forKey: "sort") == true {
+                    let sort = image.sorted{$0.fileName > $1.fileName}
+                    return sort
+                } else {
+                    let sort = image.sorted{$0.fileName < $1.fileName}
+                    return sort
+                }
+                
+            } else {
+                return [FileImage]()
+            }
+        }
+        set {
+            if let data = try? PropertyListEncoder().encode(newValue) {
+                defaults.set(data, forKey: keyImage)
+            }
+        }
+    }
+    
+    func saveImage(fileName: String, path: String){
+        let image = FileImage(fileName: fileName, path: path)
+        pictures.insert(image, at: 0)
+    }
+    
+}
+
 class DocumentViewController: UIViewController {
     
-    var pictures = [Data]()
     @IBOutlet private weak var tableView: UITableView!
     
     private lazy var picker: UIImagePickerController = {
@@ -32,56 +73,41 @@ class DocumentViewController: UIViewController {
         
     }
     
-    private func loaddImage(){
-        let directory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        
-        let directoryContent = try! FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
-        
-        let imageFiles = directoryContent.filter{$0.pathExtension == "png"}
-        
-        pictures.removeAll()
-        imageFiles.forEach({image in
-            let data = try! Data.init(contentsOf: image)
-            pictures.insert(data, at: 0)
-        })
-    }
-    
-    
     @IBAction private func addPhoto(_ sender: Any) {
         present(picker, animated: true, completion: nil)
     }
-    
     
 }
 
 extension DocumentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        loaddImage()
+        return Image.shared.pictures.count
         
-        return pictures.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! TableViewCell
         
-        cell.pictureFromData.image = UIImage(data: pictures[indexPath.row])
+        cell.pictureFromData.image = UIImage(contentsOfFile: Image.shared.pictures[indexPath.row].path)
         return cell
     }
     
 }
 
-
 extension DocumentViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickerdImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let imageName = UUID().uuidString + ".png"
+            let imageName = UUID().uuidString + ".jpg"
             let imagePath = getDocumetnDirectory().appendingPathComponent(imageName)
-            if let pngData = pickerdImage.pngData() {
-                try? pngData.write(to: imagePath)
+            if let jpgData = pickerdImage.jpegData(compressionQuality: 0.1) {
+                try? jpgData.write(to: imagePath)
+                Image.shared.saveImage(fileName: imageName, path: imagePath.path)
+                }
                 print("Image Save to path \(imagePath)")
-            }
+            
         }
+
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
@@ -91,3 +117,4 @@ extension DocumentViewController: UINavigationControllerDelegate, UIImagePickerC
         return path[0]
     }
 }
+
