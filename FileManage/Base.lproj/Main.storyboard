@@ -25,7 +25,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ef1-ru-MgE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1081.1594202898552" y="-828.34821428571422"/>
+            <point key="canvasLocation" x="1081" y="-839"/>
         </scene>
         <!--Document View Controller-->
         <scene sceneID="vOc-7E-ond">
@@ -62,7 +62,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9i-Rr-ZYX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2721.739130434783" y="-828.34821428571422"/>
+            <point key="canvasLocation" x="2720" y="-839"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="EuH-oy-Pb2">
@@ -169,21 +169,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обновить пароль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8R-Zc-bjI">
-                                <rect key="frame" x="40" y="125" width="139" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5RZ-Dd-pcd">
-                                <rect key="frame" x="40" y="156" width="139" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="139" id="Kqk-X7-VAZ"/>
-                                    <constraint firstAttribute="height" constant="34" id="lBR-H4-xt3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pn0-xq-LbJ">
                                 <rect key="frame" x="292" y="79" width="51" height="31"/>
                                 <connections>
@@ -203,10 +188,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdT-yc-4Rb">
-                                <rect key="frame" x="40" y="210" width="70" height="30"/>
-                                <state key="normal" title="Обновить"/>
+                                <rect key="frame" x="40" y="125" width="133" height="30"/>
+                                <state key="normal" title="Обновить   пароль"/>
                                 <connections>
-                                    <action selector="updatePassword:" destination="coY-6c-AqE" eventType="touchUpInside" id="sDV-8s-geO"/>
+                                    <segue destination="fRK-ah-V0p" kind="presentation" id="4pf-cO-euC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -216,31 +201,68 @@
                             <constraint firstItem="hrO-Cv-Kym" firstAttribute="leading" secondItem="pn0-xq-LbJ" secondAttribute="trailing" constant="15" id="1Te-rF-Zqw"/>
                             <constraint firstItem="zdT-yc-4Rb" firstAttribute="leading" secondItem="JXb-on-AO0" secondAttribute="leading" constant="40" id="1Yo-n4-4Rd"/>
                             <constraint firstItem="lck-sY-lkl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="juV-Zi-hIv" secondAttribute="trailing" constant="8" symbolic="YES" id="5et-qe-5yl"/>
-                            <constraint firstItem="zdT-yc-4Rb" firstAttribute="top" secondItem="5RZ-Dd-pcd" secondAttribute="bottom" constant="20" id="6VA-kU-7eM"/>
-                            <constraint firstItem="5RZ-Dd-pcd" firstAttribute="top" secondItem="q8R-Zc-bjI" secondAttribute="bottom" constant="10" id="825-z1-v4c"/>
+                            <constraint firstItem="zdT-yc-4Rb" firstAttribute="top" secondItem="juV-Zi-hIv" secondAttribute="bottom" constant="20" id="8nW-Ll-RO6"/>
                             <constraint firstItem="juV-Zi-hIv" firstAttribute="leading" secondItem="JXb-on-AO0" secondAttribute="leading" constant="40" id="JSH-In-Kg3"/>
                             <constraint firstItem="JXb-on-AO0" firstAttribute="trailing" secondItem="hrO-Cv-Kym" secondAttribute="trailing" constant="20" id="OG5-Nv-TzU"/>
-                            <constraint firstItem="5RZ-Dd-pcd" firstAttribute="leading" secondItem="JXb-on-AO0" secondAttribute="leading" constant="40" id="Omn-b1-Zrj"/>
-                            <constraint firstItem="JXb-on-AO0" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="q8R-Zc-bjI" secondAttribute="trailing" symbolic="YES" id="Rwb-xz-MPJ"/>
                             <constraint firstItem="pn0-xq-LbJ" firstAttribute="leading" secondItem="lck-sY-lkl" secondAttribute="trailing" constant="15" id="SFK-pc-g6S"/>
                             <constraint firstItem="lck-sY-lkl" firstAttribute="top" secondItem="JXb-on-AO0" secondAttribute="top" constant="42" id="WtF-ol-nVf"/>
                             <constraint firstItem="JXb-on-AO0" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zdT-yc-4Rb" secondAttribute="trailing" symbolic="YES" id="aBc-g3-LOG"/>
                             <constraint firstItem="juV-Zi-hIv" firstAttribute="top" secondItem="JXb-on-AO0" secondAttribute="top" constant="40" id="blR-lX-kDb"/>
                             <constraint firstItem="hrO-Cv-Kym" firstAttribute="top" secondItem="JXb-on-AO0" secondAttribute="top" constant="42" id="c2w-Q6-ZXK"/>
                             <constraint firstItem="pn0-xq-LbJ" firstAttribute="top" secondItem="JXb-on-AO0" secondAttribute="top" constant="35" id="gXB-et-1pG"/>
-                            <constraint firstItem="q8R-Zc-bjI" firstAttribute="top" secondItem="juV-Zi-hIv" secondAttribute="bottom" constant="20" id="ugx-3a-vXQ"/>
-                            <constraint firstItem="q8R-Zc-bjI" firstAttribute="leading" secondItem="JXb-on-AO0" secondAttribute="leading" constant="40" id="xOv-eq-ORh"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Настройки" id="a15-Z3-hpN"/>
                     <connections>
-                        <outlet property="passwordTF" destination="5RZ-Dd-pcd" id="8Uw-oB-0yS"/>
                         <outlet property="sortSwitch" destination="pn0-xq-LbJ" id="SAg-CB-VYx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ep6-8H-qRp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1984.057971014493" y="-168.08035714285714"/>
+            <point key="canvasLocation" x="1942" y="-108"/>
+        </scene>
+        <!--Update Password View Controller-->
+        <scene sceneID="6xS-gv-n8V">
+            <objects>
+                <viewController id="fRK-ah-V0p" customClass="UpdatePasswordViewController" customModule="FileManage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UTn-he-3lL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Ks-A3-jvb">
+                                <rect key="frame" x="20" y="40" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Io1-MG-tyL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6A-M0-eCk">
+                                <rect key="frame" x="158" y="140" width="98" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Обновить"/>
+                                <connections>
+                                    <action selector="tapUpdate:" destination="fRK-ah-V0p" eventType="touchUpInside" id="ePL-Pj-awK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="87y-ZZ-m6U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="87y-ZZ-m6U" firstAttribute="trailing" secondItem="7Ks-A3-jvb" secondAttribute="trailing" constant="20" id="0ky-Td-noP"/>
+                            <constraint firstItem="A6A-M0-eCk" firstAttribute="top" secondItem="7Ks-A3-jvb" secondAttribute="bottom" constant="50" id="TLu-sM-SJX"/>
+                            <constraint firstItem="7Ks-A3-jvb" firstAttribute="top" secondItem="87y-ZZ-m6U" secondAttribute="top" constant="40" id="jEo-41-Ucq"/>
+                            <constraint firstItem="7Ks-A3-jvb" firstAttribute="leading" secondItem="87y-ZZ-m6U" secondAttribute="leading" constant="20" id="mEz-Vg-kXw"/>
+                            <constraint firstItem="A6A-M0-eCk" firstAttribute="centerX" secondItem="UTn-he-3lL" secondAttribute="centerX" id="za3-1H-Bt9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="passwordTF" destination="7Ks-A3-jvb" id="bhB-Xu-NH9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X8b-0n-Q9U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2719" y="-108"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gah-nx-JKf">

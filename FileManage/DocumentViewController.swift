@@ -62,7 +62,13 @@ class DocumentViewController: UIViewController {
         return picker
     }()
     
-    private var saveImage = [UIImage]()
+    private var saveImage: [UIImage]?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        initImage()
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,25 +77,45 @@ class DocumentViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "CellId")
         
+        
     }
     
     @IBAction private func addPhoto(_ sender: Any) {
         present(picker, animated: true, completion: nil)
     }
     
+    private func initImage(){
+        for shared in Image.shared.pictures {
+            if let image = UIImage(contentsOfFile: shared.path) {
+                saveImage?.append(image)
+
+            }
+            
+        }
+        
+    }
+    
 }
+
+
 
 extension DocumentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Image.shared.pictures.count
+        if let image = saveImage {
+            return image.count
+        }
+        return 0
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! TableViewCell
-        
-        cell.pictureFromData.image = UIImage(contentsOfFile: Image.shared.pictures[indexPath.row].path)
+        if let image = saveImage {
+            cell.pictureFromData.image = image[indexPath.row]
+            return cell
+            
+        }
         return cell
     }
     
@@ -103,11 +129,11 @@ extension DocumentViewController: UINavigationControllerDelegate, UIImagePickerC
             if let jpgData = pickerdImage.jpegData(compressionQuality: 0.1) {
                 try? jpgData.write(to: imagePath)
                 Image.shared.saveImage(fileName: imageName, path: imagePath.path)
-                }
-                print("Image Save to path \(imagePath)")
+            }
+            print("Image Save to path \(imagePath)")
             
         }
-
+        
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }

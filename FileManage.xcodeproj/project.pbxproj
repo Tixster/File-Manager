@@ -18,6 +18,7 @@
 		3E8E9CC7266949130094EC75 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 3E8E9CC6266949130094EC75 /* KeychainAccess */; };
 		3E8E9CC9266966120094EC75 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E9CC8266966120094EC75 /* SettingsViewController.swift */; };
 		3E8E9CCB26696B860094EC75 /* KeychainConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E9CCA26696B860094EC75 /* KeychainConfig.swift */; };
+		3E97C2B6266D50E30075F71D /* UpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E97C2B5266D50E30075F71D /* UpdatePasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		3E8E9CC3266936050094EC75 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3E8E9CC8266966120094EC75 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3E8E9CCA26696B860094EC75 /* KeychainConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainConfig.swift; sourceTree = "<group>"; };
+		3E97C2B5266D50E30075F71D /* UpdatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				3E8D5CC12666382A0096A7C7 /* SceneDelegate.swift */,
 				3E8D5CC52666382A0096A7C7 /* Main.storyboard */,
 				3E8E9CC8266966120094EC75 /* SettingsViewController.swift */,
+				3E97C2B5266D50E30075F71D /* UpdatePasswordViewController.swift */,
 				3E8E9CC3266936050094EC75 /* LoginViewController.swift */,
 				3E8E9CCA26696B860094EC75 /* KeychainConfig.swift */,
 				3E8D5CD926667B4C0096A7C7 /* TableViewCell.swift */,
@@ -159,6 +162,7 @@
 			files = (
 				3E8E9CCB26696B860094EC75 /* KeychainConfig.swift in Sources */,
 				3E8D5CC02666382A0096A7C7 /* AppDelegate.swift in Sources */,
+				3E97C2B6266D50E30075F71D /* UpdatePasswordViewController.swift in Sources */,
 				3E8D5CDA26667B4C0096A7C7 /* TableViewCell.swift in Sources */,
 				3E8D5CC22666382A0096A7C7 /* SceneDelegate.swift in Sources */,
 				3E8E9CC4266936050094EC75 /* LoginViewController.swift in Sources */,
