@@ -16,7 +16,6 @@ class Image {
     
     struct FileImage: Codable {
         let fileName: String
-        let path: String
     }
     
     var pictures: [FileImage] {
@@ -42,8 +41,8 @@ class Image {
         }
     }
     
-    func saveImage(fileName: String, path: String){
-        let image = FileImage(fileName: fileName, path: path)
+    func saveImage(fileName: String){
+        let image = FileImage(fileName: fileName)
         pictures.insert(image, at: 0)
     }
     
@@ -62,7 +61,7 @@ class DocumentViewController: UIViewController {
         return picker
     }()
     
-    private var saveImage: [UIImage]?
+    private var saveImage: [UIImage] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -85,12 +84,13 @@ class DocumentViewController: UIViewController {
     }
     
     private func initImage(){
-        for shared in Image.shared.pictures {
-            if let image = UIImage(contentsOfFile: shared.path) {
-                saveImage?.append(image)
 
+        for shared in Image.shared.pictures {
+            let fileUrl = getDocumetnDirectory().appendingPathComponent(shared.fileName)
+            if let image = UIImage(contentsOfFile: fileUrl.path) {
+
+                saveImage.append(image)
             }
-            
         }
         
     }
@@ -101,21 +101,16 @@ class DocumentViewController: UIViewController {
 
 extension DocumentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let image = saveImage {
-            return image.count
-        }
-        return 0
-        
+            return saveImage.count
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! TableViewCell
-        if let image = saveImage {
-            cell.pictureFromData.image = image[indexPath.row]
-            return cell
-            
-        }
+        
+            cell.pictureFromData.image = saveImage[indexPath.row]
+
         return cell
     }
     
@@ -128,7 +123,7 @@ extension DocumentViewController: UINavigationControllerDelegate, UIImagePickerC
             let imagePath = getDocumetnDirectory().appendingPathComponent(imageName)
             if let jpgData = pickerdImage.jpegData(compressionQuality: 0.1) {
                 try? jpgData.write(to: imagePath)
-                Image.shared.saveImage(fileName: imageName, path: imagePath.path)
+                Image.shared.saveImage(fileName: imageName)
             }
             print("Image Save to path \(imagePath)")
             
