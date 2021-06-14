@@ -88,7 +88,6 @@ class DocumentViewController: UIViewController {
         for shared in Image.shared.pictures {
             let fileUrl = getDocumetnDirectory().appendingPathComponent(shared.fileName)
             if let image = UIImage(contentsOfFile: fileUrl.path) {
-
                 saveImage.append(image)
             }
         }
@@ -101,15 +100,17 @@ class DocumentViewController: UIViewController {
 
 extension DocumentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return saveImage.count
+        saveImage.removeAll()
+        initImage()
+        return saveImage.count
 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! TableViewCell
-        
-            cell.pictureFromData.image = saveImage[indexPath.row]
+
+        cell.pictureFromData.image = saveImage[indexPath.row]
 
         return cell
     }
@@ -129,8 +130,10 @@ extension DocumentViewController: UINavigationControllerDelegate, UIImagePickerC
             
         }
         
-        tableView.reloadData()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }
     }
     
     func getDocumetnDirectory() -> URL {
